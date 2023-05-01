@@ -25,7 +25,7 @@ public class SavingAccountTest {
                     2_000,
                     10_000,
                     1_000,
-                    -5
+                    5
             );
         });
     }
@@ -37,33 +37,33 @@ public class SavingAccountTest {
                     2_000,
                     -1_000,
                     10_000,
-                    -5
+                    5
             );
         });
     }
 
     @Test // исключение когда начальный баланс больше максимального
     public void InitialBalanceOutOfMaxTolerance() {
-        SavingAccount account = new SavingAccount(
-                2_000,
-                1_000,
-                1_500,
-                5
-        );
-
-        Assertions.assertEquals(1_500, account.getMaxBalance());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    2_000,
+                    1_000,
+                    1_500,
+                    5
+            );
+        });
     }
 
     @Test // исключение когда начальный баланс меньше минимального баланса
     public void InitialBalanceOutOfMinTolerance() {
-        SavingAccount account = new SavingAccount(
-                2_000,
-                3_000,
-                10_000,
-                5
-        );
-
-        Assertions.assertEquals(3_000, account.getMinBalance());
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1_000,
+                    2_000,
+                    10_000,
+                    5
+            );
+        });
     }
 
     @Test //  добавляем к сумме на балансе 3_000 и должны получить сумму текущего баланса и  пополнения

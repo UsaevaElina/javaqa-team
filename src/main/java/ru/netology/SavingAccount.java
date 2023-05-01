@@ -1,30 +1,33 @@
 package ru.netology.javaqadiplom;
 
 /**
- * Кредитный счёт
- * Может иметь баланс вплоть до отрицательного, но до указанного кредитного лимита.
- * Имеет ставку - количество процентов годовых на сумму на балансе, если она меньше нуля.
- * При создании, баланс кредитного счёта изначально выставляется в кредитный лимит.
+ * Сберегательный счёт
+ * Может иметь баланс только в пределах от указанного минимального до указанного максимального включительно.
+ * Не может уходить в минус (минимальный баланс не может быть отрицательным).
+ * Имеет ставку - количество процентов годовых на остаток.
  */
-public class CreditAccount extends Account {
-    protected int creditLimit;
+public class SavingAccount extends Account {
+    protected int minBalance;
+    protected int maxBalance;
 
     /**
-     * Создаёт новый объект кредитного счёта с заданными параметрами.
-     * Если параметры некорректны (кредитный лимит отрицательный и так далее), то
+     * Создаёт новый объект сберегательного счёта с заданными параметрами.
+     * Если параметры некорректны (мин. баланс больше максимального и так далее), то
      * должно выкидываться исключения вида IllegalArgumentException.
-     * @param initialBalance - неотрицательное число, начальный баланс для счёта
-     * @param creditLimit - неотрицательное число, максимальная сумма которую можно задолжать банку
-     * @param rate - неотрицательное число, ставка кредитования для расчёта долга за отрицательный баланс
+     * @param initialBalance - начальный баланс
+     * @param minBalance - минимальный баланс
+     * @param maxBalance - максимальный баланс
+     * @param rate - неотрицательное число, ставка в процентах годовых на остаток
      */
-    public CreditAccount(int initialBalance, int creditLimit, int rate) {
-        if (rate <= 0) {
+    public SavingAccount(int initialBalance, int minBalance, int maxBalance, int rate) {
+        if (rate < 0) {
             throw new IllegalArgumentException(
-                    "Накопительная ставка не может быть отрицательной, а у вас: " + rate
+              "Накопительная ставка не может быть отрицательной, а у вас: " + rate
             );
         }
         this.balance = initialBalance;
-        this.creditLimit = creditLimit;
+        this.minBalance = minBalance;
+        this.maxBalance = maxBalance;
         this.rate = rate;
     }
 
@@ -34,6 +37,7 @@ public class CreditAccount extends Account {
      * на сумму покупки. Если же операция может привести к некорректному
      * состоянию счёта (например, баланс может уйти в минус), то операция должна
      * завершиться вернув false и ничего не поменяв на счёте.
+     *
      * @param amount - сумма покупки
      * @return true если операция прошла успешно, false иначе.
      */
@@ -43,8 +47,7 @@ public class CreditAccount extends Account {
             return false;
         }
         balance = balance - amount;
-        if (balance > -creditLimit) {
-            balance = -amount;
+        if (balance > minBalance) {
             return true;
         } else {
             return false;
@@ -67,16 +70,19 @@ public class CreditAccount extends Account {
         if (amount <= 0) {
             return false;
         }
-        balance = amount;
-        return true;
+        if (balance + amount < maxBalance) {
+            balance = amount;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
-     * Операция расчёта процентов на отрицательный баланс счёта при условии, что
+     * Операция расчёта процентов на остаток счёта при условии, что
      * счёт не будет меняться год. Сумма процентов приводится к целому
      * числу через отбрасывание дробной части (так и работает целочисленное деление).
-     * Пример: если на счёте -200 рублей, то при ставке 15% ответ должен быть -30.
-     * Пример 2: если на счёте 200 рублей, то при любой ставке ответ должен быть 0.
+     * Пример: если на счёте 200 рублей, то при ставке 15% ответ должен быть 30.
      * @return
      */
     @Override
@@ -84,7 +90,11 @@ public class CreditAccount extends Account {
         return balance / 100 * rate;
     }
 
-    public int getCreditLimit() {
-        return creditLimit;
+    public int getMinBalance() {
+        return minBalance;
+    }
+
+    public int getMaxBalance() {
+        return maxBalance;
     }
 }

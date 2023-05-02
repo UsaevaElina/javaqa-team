@@ -116,7 +116,7 @@ public class CreditAccountTest {
     public void ThrowExceptionForInitialBalance(){
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
-                    -5_000,
+                    -15_000,
                     8_000,
                     10
             );
@@ -138,7 +138,7 @@ public class CreditAccountTest {
     public void ShouldBalanceEqualsMinus(){
         CreditAccount account = new CreditAccount(
                 -200,
-                5_000,
+                 5_000,
                 15
         );
         int expected = -30;

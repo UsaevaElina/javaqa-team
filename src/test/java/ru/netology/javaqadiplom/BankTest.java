@@ -26,6 +26,7 @@ public class BankTest {
         Assertions.assertEquals(bank.transfer(savingAccount, creditAccount, 500), true);
         Assertions.assertEquals(creditAccount.getBalance(), savingAccount.getBalance());
     }
+
     @Test
     public void TransferTestIfCreditLimitLess() {
         Bank bank = new Bank();
@@ -41,9 +42,10 @@ public class BankTest {
                 0
         );
         Assertions.assertEquals(bank.transfer(creditAccount, savingAccount, 500), false);
-        Assertions.assertEquals(savingAccount.getBalance(),1000);
-        Assertions.assertEquals(creditAccount.getBalance(),0);
+        Assertions.assertEquals(savingAccount.getBalance(), 1000);
+        Assertions.assertEquals(creditAccount.getBalance(), 0);
     }
+
     @Test
     public void TransferTestIfSavingLimitLess() {
         Bank bank = new Bank();
@@ -59,9 +61,10 @@ public class BankTest {
                 0
         );
         Assertions.assertEquals(bank.transfer(savingAccount, creditAccount, 1000), false);
-        Assertions.assertEquals(savingAccount.getBalance(),1_000);
-        Assertions.assertEquals(creditAccount.getBalance(),2_000);
+        Assertions.assertEquals(savingAccount.getBalance(), 1_000);
+        Assertions.assertEquals(creditAccount.getBalance(), 2_000);
     }
+
     @Test
     public void TransferTestIfSavingLimitMore() {
         Bank bank = new Bank();
@@ -77,9 +80,10 @@ public class BankTest {
                 0
         );
         Assertions.assertEquals(bank.transfer(creditAccount, savingAccount, 19_000), false);
-        Assertions.assertEquals(savingAccount.getBalance(),1_000);
-        Assertions.assertEquals(creditAccount.getBalance(),20_000);
+        Assertions.assertEquals(savingAccount.getBalance(), 1_000);
+        Assertions.assertEquals(creditAccount.getBalance(), 20_000);
     }
+
     @Test
     public void TransferTestFromCreditLimitToCreditLimit() {
         Bank bank = new Bank();
@@ -94,9 +98,10 @@ public class BankTest {
                 15
         );
         Assertions.assertEquals(bank.transfer(creditAccount1, creditAccount2, 1_000), true);
-        Assertions.assertEquals(creditAccount1.getBalance(),1_000);
-        Assertions.assertEquals(creditAccount2.getBalance(),2_000);
+        Assertions.assertEquals(creditAccount1.getBalance(), 1_000);
+        Assertions.assertEquals(creditAccount2.getBalance(), 2_000);
     }
+
     @Test
     public void TransferTestFromCreditLimitToCreditLimitMore() {
         Bank bank = new Bank();
@@ -111,9 +116,10 @@ public class BankTest {
                 15
         );
         Assertions.assertEquals(bank.transfer(creditAccount1, creditAccount2, 4_000), false);
-        Assertions.assertEquals(creditAccount1.getBalance(),2_000);
-        Assertions.assertEquals(creditAccount2.getBalance(),1_000);
+        Assertions.assertEquals(creditAccount1.getBalance(), 2_000);
+        Assertions.assertEquals(creditAccount2.getBalance(), 1_000);
     }
+
     @Test
     public void TransferTestFromSavingToSaving() {
         Bank bank = new Bank();
@@ -130,9 +136,10 @@ public class BankTest {
                 0
         );
         Assertions.assertEquals(bank.transfer(savingAccount1, savingAccount2, 1_000), true);
-        Assertions.assertEquals(savingAccount1.getBalance(),1_000);
-        Assertions.assertEquals(savingAccount2.getBalance(),2_000);
+        Assertions.assertEquals(savingAccount1.getBalance(), 1_000);
+        Assertions.assertEquals(savingAccount2.getBalance(), 2_000);
     }
+
     @Test
     public void TransferTestFromSavingToSavingLimitLess() {
         Bank bank = new Bank();
@@ -149,7 +156,7 @@ public class BankTest {
                 0
         );
         Assertions.assertEquals(bank.transfer(savingAccount1, savingAccount2, 4_000), false);
-        Assertions.assertEquals(savingAccount1.getBalance(),2_000);
-        Assertions.assertEquals(savingAccount2.getBalance(),1_000);
+        Assertions.assertEquals(savingAccount1.getBalance(), 2_000);
+        Assertions.assertEquals(savingAccount2.getBalance(), 1_000);
     }
 }

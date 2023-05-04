@@ -15,7 +15,7 @@ public class CreditAccountTest {
                 15
         );
 
-        Assertions.assertEquals(account.add(3_000), true);
+        Assertions.assertTrue(account.add(3_000));
         Assertions.assertEquals(3_000, account.getBalance());
     }
 
@@ -28,7 +28,7 @@ public class CreditAccountTest {
                 15
         );
 
-        Assertions.assertEquals(account.add(0), false);
+        Assertions.assertFalse(account.add(0));
 
         Assertions.assertEquals(6_000, account.getBalance());
     }
@@ -42,7 +42,7 @@ public class CreditAccountTest {
                 15
         );
 
-        Assertions.assertEquals(account.add(-100), false);
+        Assertions.assertFalse(account.add(-100));
 
         Assertions.assertEquals(6_000, account.getBalance());
     }
@@ -55,7 +55,7 @@ public class CreditAccountTest {
                 8_000,
                 10
         );
-        Assertions.assertEquals(account.pay(5_000), true);
+        Assertions.assertTrue(account.pay(5_000));
         Assertions.assertEquals(1_000, account.getBalance());
 
     }
@@ -68,7 +68,7 @@ public class CreditAccountTest {
                 8_000,
                 10
         );
-        Assertions.assertEquals(account.pay(7_000), true);
+        Assertions.assertTrue(account.pay(7_000));
         Assertions.assertEquals(-2_000, account.getBalance());
     }
 
@@ -80,7 +80,7 @@ public class CreditAccountTest {
                 8_000,
                 10
         );
-        Assertions.assertEquals(account.pay(13_000), true);
+        Assertions.assertTrue(account.pay(13_000));
         Assertions.assertEquals(-8_000, account.getBalance());
     }
 
@@ -92,7 +92,7 @@ public class CreditAccountTest {
                 8_000,
                 10
         );
-        Assertions.assertEquals(account.pay(13_001), false);
+        Assertions.assertFalse(account.pay(13_001));
         Assertions.assertEquals(5_000, account.getBalance());
     }
 
@@ -104,7 +104,7 @@ public class CreditAccountTest {
                 8_000,
                 10
         );
-        Assertions.assertEquals(account.pay(0), false);
+        Assertions.assertFalse(account.pay(0));
         Assertions.assertEquals(5_000, account.getBalance());
     }
 

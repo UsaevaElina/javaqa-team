@@ -90,7 +90,7 @@ public class SavingAccountTest {
 
 //        account.add(0);
 
-        Assertions.assertEquals(false, account.add(0));
+        Assertions.assertFalse(account.add(0));
         Assertions.assertEquals(2_000, account.getBalance());
     }
 
@@ -103,7 +103,7 @@ public class SavingAccountTest {
                 5
         );
 
-        Assertions.assertEquals(false, account.add(10_000));
+        Assertions.assertFalse(account.add(10_000));
         Assertions.assertEquals(2_000, account.getBalance());
     }
 
@@ -116,7 +116,7 @@ public class SavingAccountTest {
                 5
         );
 
-        Assertions.assertEquals(false, account.pay(0));
+        Assertions.assertFalse(account.pay(0));
         Assertions.assertEquals(2_000, account.getBalance());
     }
 
@@ -129,7 +129,7 @@ public class SavingAccountTest {
                 5
         );
 
-        Assertions.assertEquals(false, account.pay(1_500));
+        Assertions.assertFalse(account.pay(1_500));
         Assertions.assertEquals(2_000, account.getBalance());
     }
 
@@ -143,7 +143,7 @@ public class SavingAccountTest {
                 5
         );
 
-        Assertions.assertEquals(true, account.pay(500));
+        Assertions.assertTrue(account.pay(500));
         Assertions.assertEquals(1500, account.getBalance());
     }
 

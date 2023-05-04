@@ -2,11 +2,6 @@ package ru.netology.javaqadiplom;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.netology.javaqadiplom.Account;
-import ru.netology.javaqadiplom.Bank;
-import ru.netology.javaqadiplom.SavingAccount;
-
-import java.awt.datatransfer.Transferable;
 
 public class BankTest {
     @Test
@@ -23,7 +18,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(savingAccount, creditAccount, 500), true);
+        Assertions.assertTrue(bank.transfer(savingAccount, creditAccount, 500));
         Assertions.assertEquals(creditAccount.getBalance(), savingAccount.getBalance());
     }
 
@@ -41,7 +36,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(creditAccount, savingAccount, 500), false);
+        Assertions.assertFalse(bank.transfer(creditAccount, savingAccount, 500));
         Assertions.assertEquals(savingAccount.getBalance(), 1000);
         Assertions.assertEquals(creditAccount.getBalance(), 0);
     }
@@ -60,7 +55,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(savingAccount, creditAccount, 1000), false);
+        Assertions.assertFalse(bank.transfer(savingAccount, creditAccount, 1000));
         Assertions.assertEquals(savingAccount.getBalance(), 1_000);
         Assertions.assertEquals(creditAccount.getBalance(), 2_000);
     }
@@ -79,7 +74,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(creditAccount, savingAccount, 19_000), false);
+        Assertions.assertFalse(bank.transfer(creditAccount, savingAccount, 19_000));
         Assertions.assertEquals(savingAccount.getBalance(), 1_000);
         Assertions.assertEquals(creditAccount.getBalance(), 20_000);
     }
@@ -97,7 +92,7 @@ public class BankTest {
                 1_000,
                 15
         );
-        Assertions.assertEquals(bank.transfer(creditAccount1, creditAccount2, 1_000), true);
+        Assertions.assertTrue(bank.transfer(creditAccount1, creditAccount2, 1_000));
         Assertions.assertEquals(creditAccount1.getBalance(), 1_000);
         Assertions.assertEquals(creditAccount2.getBalance(), 2_000);
     }
@@ -115,7 +110,7 @@ public class BankTest {
                 1_000,
                 15
         );
-        Assertions.assertEquals(bank.transfer(creditAccount1, creditAccount2, 4_000), false);
+        Assertions.assertFalse(bank.transfer(creditAccount1, creditAccount2, 4_000));
         Assertions.assertEquals(creditAccount1.getBalance(), 2_000);
         Assertions.assertEquals(creditAccount2.getBalance(), 1_000);
     }
@@ -135,7 +130,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(savingAccount1, savingAccount2, 1_000), true);
+        Assertions.assertTrue(bank.transfer(savingAccount1, savingAccount2, 1_000));
         Assertions.assertEquals(savingAccount1.getBalance(), 1_000);
         Assertions.assertEquals(savingAccount2.getBalance(), 2_000);
     }
@@ -155,7 +150,7 @@ public class BankTest {
                 10_000,
                 0
         );
-        Assertions.assertEquals(bank.transfer(savingAccount1, savingAccount2, 4_000), false);
+        Assertions.assertFalse(bank.transfer(savingAccount1, savingAccount2, 4_000));
         Assertions.assertEquals(savingAccount1.getBalance(), 2_000);
         Assertions.assertEquals(savingAccount2.getBalance(), 1_000);
     }

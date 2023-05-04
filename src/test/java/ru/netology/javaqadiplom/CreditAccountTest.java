@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 public class CreditAccountTest {
 
     //Пополнение на 3000, изначальный баланс 0
+    //Пополнение на 3000, изначальный баланс 0
     @Test
     public void shouldAddToPositiveBalance() {
         CreditAccount account = new CreditAccount(
@@ -124,7 +125,7 @@ public class CreditAccountTest {
     public void ThrowExceptionForInitialBalance() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             CreditAccount account = new CreditAccount(
-                    -5_000,
+                    -15_000,
                     8_000,
                     10
             );

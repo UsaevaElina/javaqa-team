@@ -181,4 +181,16 @@ public class CreditAccountTest {
         int actual = account.yearChange();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void ShouldBalanceEqualsLow() {
+        CreditAccount account = new CreditAccount(
+                -99,
+                5_000,
+                80
+        );
+        int expected = -79;
+        int actual = account.yearChange();
+        Assertions.assertEquals(expected, actual);
+    }
 }
